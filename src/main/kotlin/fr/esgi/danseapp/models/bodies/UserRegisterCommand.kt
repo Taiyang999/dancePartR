@@ -6,6 +6,7 @@ import fr.esgi.danseapp.services.UserServices
 import io.jkratz.mediator.core.Request
 import io.jkratz.mediator.core.RequestHandler
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Component
 import java.util.*
 
@@ -25,11 +26,12 @@ class RegisterUserCommandHandler
         if (userUnq != null) {
             return userUnq.id
         }
+        val encoder = BCryptPasswordEncoder()
         val newAccount = UserEntity(
             id = service.getNewId(),
             username = request.username,
             email = request.email,
-            password = request.password
+            password = encoder.encode(request.password)
         )
         return service.save(newAccount)
     }

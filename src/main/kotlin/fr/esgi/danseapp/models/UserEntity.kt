@@ -17,11 +17,11 @@ class UserEntity() {
     lateinit var id: UUID
 
     @Column(name = "username")
-    lateinit var username: String
+    var username = ""
     @Column(name = "email")
-    lateinit var email: String
+    var email =""
     @Column(name = "password")
-    lateinit var password: String
+    var password = ""
 
     constructor(id : UUID, username : String, email : String, password : String) : this() {
         this.id = id
